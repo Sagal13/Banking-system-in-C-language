@@ -1,32 +1,36 @@
-# Library Management System in Python
-class Book:
-    def __init__(self, title, author, available_copies):
-        self.title = title
-        self.author = author
-        self.available_copies = available_copies
+# Shopping Website in Java
+   import java.util.ArrayList;
+import java.util.Scanner;
 
-    def display_info(self):
-        print(f"Title: {self.title}\nAuthor: {self.author}\nAvailable Copies: {self.available_copies}\n")
+class Product {
+    private String name;
+    private double price;
 
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 
-class Library:
-    def __init__(self):
-        self.books = []
+    public String getName() {
+        return name;
+    }
 
-    def add_book(self, book):
-        self.books.append(book)
-        print(f"Book '{book.title}' added to the library.")
+    public double getPrice() {
+        return price;
+    }
+}
 
-    def display_books(self):
-        if not self.books:
-            print("No books in the library.")
-        else:
-            print("Books in the Library:")
-            for book in self.books:
-                book.display_info()
+class ShoppingCart {
+    private ArrayList<Product> items = new ArrayList<>();
 
-    def borrow_book(self, title):
-        for book in self.books:
-            if book.title.lower() == title.
+    public void addToCart(Product product) {
+        items.add(product);
+    }
 
-  
+    public void displayCart() {
+        System.out.println("Shopping Cart:");
+        for (Product item : items) {
+            System.out.println(item.getName() + " - $" + item.getPrice());
+        }
+        System.out.println("Total: $" + calcul
+
