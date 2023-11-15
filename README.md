@@ -1,78 +1,91 @@
-# Banking-system-in-C-language
-#include <stdio.h>
+# Air Ticket Booking in C++
+#include <iostream>
+#include <string>
 
-// Function to display the menu
-void displayMenu() {
-    printf("\n1. Create Account\n");
-    printf("2. Deposit Money\n");
-    printf("3. Withdraw Money\n");
-    printf("4. Display Balance\n");
-    printf("5. Exit\n");
-}
+class Flight {
+private:
+    std::string flightNumber;
+    std::string destination;
+    int availableSeats;
+    float ticketPrice;
 
-// Function to create a new account
-void createAccount(float *balance) {
-    printf("Enter initial balance: ");
-    scanf("%f", balance);
-    printf("Account created successfully!\n");
-}
+public:
+    // Constructor
+    Flight(std::string number, std::string dest, int seats, float price)
+        : flightNumber(number), destination(dest), availableSeats(seats), ticketPrice(price) {}
 
-// Function to deposit money
-void depositMoney(float *balance) {
-    float amount;
-    printf("Enter deposit amount: ");
-    scanf("%f", &amount);
-    *balance += amount;
-    printf("Deposit successful! Current balance: %.2f\n", *balance);
-}
-
-// Function to withdraw money
-void withdrawMoney(float *balance) {
-    float amount;
-    printf("Enter withdrawal amount: ");
-    scanf("%f", &amount);
-    if (*balance >= amount) {
-        *balance -= amount;
-        printf("Withdrawal successful! Current balance: %.2f\n", *balance);
-    } else {
-        printf("Insufficient funds!\n");
+    // Function to display flight details
+    void displayFlightDetails() {
+        std::cout << "Flight Number: " << flightNumber << "\nDestination: " << destination
+                  << "\nAvailable Seats: " << availableSeats << "\nTicket Price: $" << ticketPrice << "\n\n";
     }
-}
 
-// Function to display account balance
-void displayBalance(float balance) {
-    printf("Your current balance: %.2f\n", balance);
-}
+    // Function to book a ticket
+    void bookTicket() {
+        if (availableSeats > 0) {
+            std::cout << "Enter passenger name: ";
+            std::string passengerName;
+            std::cin.ignore(); // Clear the input buffer
+            std::getline(std::cin, passengerName);
+
+            std::cout << "Ticket booked successfully for " << passengerName << ". Enjoy your flight!\n\n";
+            availableSeats--;
+        } else {
+            std::cout << "Sorry, no available seats for this flight.\n\n";
+        }
+    }
+};
 
 int main() {
-    float balance = 0;
+    // Create instances of Flight class
+    Flight flight1("F101", "New York", 50, 500.0);
+    Flight flight2("F202", "London", 40, 600.0);
+    Flight flight3("F303", "Tokyo", 30, 700.0);
+
     int choice;
 
     do {
-        displayMenu();
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        // Display menu
+        std::cout << "1. Display Flight Details\n";
+        std::cout << "2. Book a Ticket\n";
+        std::cout << "3. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
         switch (choice) {
             case 1:
-                createAccount(&balance);
+                std::cout << "\nFlight Details:\n";
+                flight1.displayFlightDetails();
+                flight2.displayFlightDetails();
+                flight3.displayFlightDetails();
                 break;
+
             case 2:
-                depositMoney(&balance);
+                std::cout << "\nEnter flight number to book a ticket: ";
+                std::string flightNumber;
+                std::cin >> flightNumber;
+
+                if (flightNumber == "F101") {
+                    flight1.bookTicket();
+                } else if (flightNumber == "F202") {
+                    flight2.bookTicket();
+                } else if (flightNumber == "F303") {
+                    flight3.bookTicket();
+                } else {
+                    std::cout << "Invalid flight number. Please try again.\n\n";
+                }
                 break;
+
             case 3:
-                withdrawMoney(&balance);
+                std::cout << "Exiting the program. Thank you!\n";
                 break;
-            case 4:
-                displayBalance(balance);
-                break;
-            case 5:
-                printf("Exiting the program. Goodbye!\n");
-                break;
+
             default:
-                printf("Invalid choice. Please try again.\n");
+                std::cout << "Invalid choice. Please try again.\n\n";
         }
-    } while (choice != 5);
+
+    } while (choice != 3);
 
     return 0;
 }
+
